@@ -2,7 +2,7 @@
 # Create functions to process events to work through game, generate ASCII art etc.
 # Story will progress by selecting the appropriate choices.
 # Bring in ASCII art from separate files.
-# from playsound import playsound
+from playsound import playsound
 
 def print_ascii(fn):
     f= open(fn,"r")
@@ -19,10 +19,18 @@ print("|  which can grant you all you ever desired. But you will have to navigat
 print("|  treacherous terrain for this one-of-a-kind item. So, traveler... what do you say?   |")
 print("|   Can you navigate the tough trek ahead and return more powerful then ever before?   |")
 print("|--------------------------------------------------------------------------------------|")
+playsound("goodbadugly-whistle-long.mp3")
+
+name = ""
+
+def global_name():
+    print(name)
+    
 
 def accept():
-    traveler = input(">How courageous... adventurous. What's your name traveler? \n>")
-    print(f">Enjoy the ride {traveler}...")
+    global name
+    name = input(">How courageous... adventurous. What's your name traveler? \n>".format(global_name))
+    print(f">Enjoy the ride {name}...")
     print("|--------------------------------------------------------------------------------------|")
     print("| You accept the ticket and board the train. You feel a mysterious aura as you enter.  |")
     print("|  As the train begins to pick up speed you hear thunderous claps as you notice your   |")
@@ -35,6 +43,7 @@ def accept():
 
 def reject():
     print_ascii("sign.txt")
+    playsound("the-price-is-right-losing-horn.mp3")
     print("|------------------------------------------------------------------------------------|")
     print("|                                                                                    |")
     print("| That's too bad. Fortune favors the brave. It's good to know when you can't cut it. |")
@@ -44,6 +53,7 @@ def reject():
 
 def stay():
     print_ascii("death.txt")
+    playsound("the-price-is-right-losing-horn.mp3")
     print("|---------------------------------------------------------------------------------------|")
     print("|   You spend days on end trying to restart the train and desperately try to find a way |")
     print("|    back home. You look through all you can to no avail. Too scared to move away from  |")
@@ -76,6 +86,7 @@ def search():
 
 def run():
     print_ascii("wolf.txt")
+    playsound("the-price-is-right-losing-horn.mp3")
     print("|---------------------------------------------------------------------------------------|")
     print("|  Spooked and confused by the whole sight you feel that you need to run! Just as this  |")
     print("| thought crosses your mind you hear a low rumble and the a slight growl. You turn and  |")
@@ -95,6 +106,7 @@ def use_key():
 
 def investigate():
     print_ascii("landscape.txt")
+    playsound("the-price-is-right-losing-horn.mp3")
     print("|---------------------------------------------------------------------------------------|")
     print("|You decide that maybe this was all not worth it after all and that a floating door is a|")
     print("| too much right now. You begin to walk away looking for another soul hoping to find a  |")
@@ -106,6 +118,7 @@ def investigate():
 
 def finish():
     print_ascii("win.txt")
+    playsound("goodresult.mp3")
     print('|---------------------------------------------------------------------------------------|')
     print('|   As you push through the door you feel your head become cloudy and start hearing a   |')
     print('|  distant ringing in the distance. The door becomes heavier as you think you come too  |')
@@ -113,10 +126,10 @@ def finish():
     print('|   louder and louder. You shut your eyes and push with all your might! You once again  |')
     print('|  open your eyes to new surroundings. Your room... you stop the alarm clocks intrusive |')
     print('|    sound as you think back to the dream and whisper to yuorself, "That was weird!"    |')
-    print('|                                     GAME COMPLETE                                     |')
+    print('|                                   GAME COMPLETE                                       |')
     print('|---------------------------------------------------------------------------------------|')
 
-first_decision = input(">Traveler... Do you accept the ticket of a lifetime? \nAccept or Reject? \n>").lower()
+first_decision = input(f">{name}... Do you accept the ticket of a lifetime? \nAccept or Reject? \n>").lower()
 
 if first_decision == "accept":
     accept()
@@ -137,7 +150,7 @@ print("|   have to make a choice. Do you stay or do you step foot into the unkno
 print("|                     Should you stay or should you go now?                            |")
 print("|--------------------------------------------------------------------------------------|")
 
-second_decision = input(">Traveler... Do you stay and try to jerry-rig the train to get back home? Or do you travel out into the unknown plateau? \nStay or Go? \n>").lower()
+second_decision = input(f">{name}... Do you stay and try to jerry-rig the train to get back home? Or do you travel out into the unknown plateau? \nStay or Go? \n>").lower()
 
 if second_decision == "stay":
     stay()
@@ -146,7 +159,7 @@ elif second_decision == "go":
 else:
     print('Not a valid input. Please type "Stay" or "Go"')
 
-third_decision = input(">Traveler... Do you search? Or do you run? \nSearch or Run? \n>").lower()
+third_decision = input(f">{name}... Do you search? Or do you run? \nSearch or Run? \n>").lower()
 
 if third_decision == "search":
     search()
@@ -155,7 +168,7 @@ elif third_decision == "run":
 else:
     print('Not a valid input. Please type "Search" or "Run"')
 
-fourth_decision = input(">Traveler... Do you use the key? Or do you investigate eslewhere? \nUse Key or Investigate? \n>").lower()
+fourth_decision = input(f">{name}... Do you use the key? Or do you investigate eslewhere? \nUse Key or Investigate? \n>").lower()
 
 if fourth_decision == "use key":
     use_key()
@@ -164,7 +177,7 @@ elif fourth_decision == "investigate":
 else:
     print('Not a valid input. Please type "Search" or "Run"')
 
-sixth_decision = input(">Traveler... Do you want to finish the quest? \nFinish\n>").lower()
+sixth_decision = input(f">{name}... Do you want to finish the quest? \nFinish\n>").lower()
 
 if sixth_decision == "finish":
     finish()
